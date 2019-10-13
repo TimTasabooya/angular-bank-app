@@ -32,16 +32,11 @@
         <!-- Add functionality to the buttons below -->
         <ul class="options-list">
             <li class="options-item">
-                <button (click)="withdraw()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Make a Withdrawal</button>
+                <button md-button class="atmbtn" (click)="withdraw()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Make a Withdrawal</button> <button md-button class="atmbtn" (click)="deposit()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Deposit Money</button>
             </li>
             <li class="options-item">
-                <button (click)="deposit()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Deposit Money</button>
-            </li>
-            <li class="options-item">
-                <button (click)="displayBalance()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Balance Inquiry</button>
-            </li>
-            <li class="options-item">
-                <button (click)="displayTransaction()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Transactions History</button>
+                <button md-button class="atmbtn" (click)="displayBalance()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Balance Inquiry</button> <button md-button class="atmbtn" (click)="displayTransaction()"
+                    [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Transactions History</button>
             </li>
         </ul>
     </aside>
