@@ -1,30 +1,49 @@
 <h1>ATM View</h1>
 <div class="main">
     <section class="display">
-        > Welcome, Henry!
+        <h2>Welcome {{customer}}</h2>
         <!-- Display Feedback information here -->
-        <h2>{{value}}</h2>
-        <input type="text" [(ngModel)]="value" />
+        <h2 *ngIf="!(isDisplayBalance || isDisplayMessage || isDisplayTransaction)">Please enter transaction amount</h2>
+
         <div *ngIf="isDisplayBalance">
             <h2>Your Balance is {{this.bankService.account.balance}} usd.</h2>
-            <button (click)="closeBalance()">Clear</button>
+            <button (click)="closeBalance()">Return</button>
+        </div>
+        <div *ngIf="isDisplayMessage">
+            <h2>Transaction Successful!</h2>
+            <button (click)="closeMessage()">Return</button>
+        </div>
+        <div *ngIf="!(this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction)">
+            <h2 *ngIf="value">${{value}}.00</h2>
+            <input type="text" [(ngModel)]="value" onfocus="this.value=''" />
+        </div>
+        <div *ngIf="isDisplayTransaction">
+            <h2>Transactions History</h2>
+            <button (click)="closeTransaction()">Return</button>
+            <div class="trans" *ngFor="let tran of this.bankService.account.transactions">
+                <h3>Date: {{tran.date}}</h3>
+                <h3>Type: {{tran.type}}</h3>
+                <h3>Amount: ${{tran.amount}}</h3>
+                <h3>currency: {{tran.currency}}</h3>
+            </div>
         </div>
     </section>
     <aside class="options">
         <!-- Add functionality to the buttons below -->
         <ul class="options-list">
             <li class="options-item">
-                <button (click)="withdraw()">Make a Withdrawal</button>
+                <button (click)="withdraw()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Make a Withdrawal</button>
             </li>
             <li class="options-item">
-                <button (click)="deposit()">Deposit Money</button>
+                <button (click)="deposit()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Deposit Money</button>
             </li>
             <li class="options-item">
-                <button (click)="displayBalance()">Balance Inquiry</button>
+                <button (click)="displayBalance()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Balance Inquiry</button>
             </li>
             <li class="options-item">
-                <button>Transactions History</button>
+                <button (click)="displayTransaction()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Transactions History</button>
             </li>
         </ul>
     </aside>
 </div>
+<!-- My attempt at number validating the input -->

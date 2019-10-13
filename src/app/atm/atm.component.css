@@ -1,23 +1,41 @@
-
 .main {
-  display: flex;
-  flex-flow: row nowrap;
+    display: flex;
+    flex-flow: row nowrap;
+    -webkit-box-shadow: 0px 0px 20px 10px #0085ff;
+    -moz-box-shadow: 0px 0px 20px 10px #0085ff;
+    box-shadow: 0px 0px 20px 10px #0085ff;
 }
 
 .display {
-  flex-basis: 50vw;
-  background-color: darkslategrey;
-  color: white;
+    flex-basis: 50vw;
+    background-color: navy;
+    color: white;
 }
 
 .options {
-  flex-basis: 50vw;
+    flex-basis: 50vw;
+    margin: 20px;
 }
 
 .options-list {
-  list-style: none;
+    list-style: none;
 }
 
-.options-item {
+.options-item {}
 
+input {
+    margin: 15px;
+}
+
+p {
+    color: red;
+}
+
+h1 {
+    margin: 30px;
+}
+
+.trans {
+    border: 5px solid #707374;
+    margin: 5px;
 }

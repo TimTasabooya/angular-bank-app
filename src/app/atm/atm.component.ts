@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BankService } from '../bank.service';
-
+import { ViewChild } from '@angular/core';
 @Component({
   selector: 'app-atm',
   templateUrl: './atm.component.html',
@@ -9,25 +9,51 @@ import { BankService } from '../bank.service';
 export class AtmComponent {
 
   constructor(public bankService: BankService) { }
-  value = '';
-  isDisplayBalance = false;
+  @ViewChild('myForm') formValues; // Added this
+  value: number;
+  isDisplayBalance: boolean = false;
+  isDisplayMessage: boolean = false;
+  isDisplayTransaction: boolean = false;
+  // isDisabled: boolean = (this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction);
+
+  customer = `${this.bankService.account.fname} ${this.bankService.account.lname}`;
+  
 
 withdraw() {
   this.bankService.makeWithdrawal(this.value);
+  this.displayMessage();
+  this.value = 0;
 }
 
 deposit() {
   this.bankService.makeDeposit(this.value);
+  this.displayMessage();
+  this.value = 0;
 }
 
 displayBalance() {
-  console.log(this.isDisplayBalance);
   this.isDisplayBalance = true;
-  console.log(this.isDisplayBalance);
 }
 
 closeBalance() {
   this.isDisplayBalance = false;
 }
+
+displayMessage() {
+  this.isDisplayMessage = true;
+}
+
+closeMessage() {
+  this.isDisplayMessage = false;
+}
+
+displayTransaction() {
+  this.isDisplayTransaction = true;
+}
+
+closeTransaction() {
+  this.isDisplayTransaction = false;
+}
+
 
 }
