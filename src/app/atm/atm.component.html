@@ -6,7 +6,7 @@
         <h2 *ngIf="!(isDisplayBalance || isDisplayMessage || isDisplayTransaction)">Please enter transaction amount</h2>
 
         <div *ngIf="isDisplayBalance">
-            <h2>Your Balance is {{this.bankService.account.balance}} usd.</h2>
+            <h2>Your Balance is ${{this.bankService.account.balance}} usd.</h2>
             <button (click)="closeBalance()">Return</button>
         </div>
         <div *ngIf="isDisplayMessage">
@@ -20,16 +20,17 @@
         <div *ngIf="isDisplayTransaction">
             <h2>Transactions History</h2>
             <button (click)="closeTransaction()">Return</button>
-            <div class="trans" *ngFor="let tran of this.bankService.account.transactions">
+            <div class="trans" *ngFor="let tran of transactions">
                 <h3>Date: {{tran.date}}</h3>
                 <h3>Type: {{tran.type}}</h3>
                 <h3>Amount: ${{tran.amount}}</h3>
-                <h3>currency: {{tran.currency}}</h3>
+                <h3>Currency: {{tran.currency}}</h3>
             </div>
         </div>
     </section>
     <aside class="options">
         <!-- Add functionality to the buttons below -->
+        <h2 *ngIf="isDisplayWarning" class="warning">Please enter whole numbers only!</h2>
         <ul class="options-list">
             <li class="options-item">
                 <button md-button class="atmbtn" (click)="withdraw()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Make a Withdrawal</button> <button md-button class="atmbtn" (click)="deposit()" [disabled]="this.isDisplayBalance || this.isDisplayMessage || this.isDisplayTransaction">Deposit Money</button>
